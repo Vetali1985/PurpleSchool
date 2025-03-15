@@ -16,7 +16,7 @@ import LoginScreen from "../components/LoginScreen/LoginScreen.jsx";
 
 
 export default function App() {
-  const [screen, onChangeScreen] = useState(false);
+  const [screen, onChangeScreen] = useState(true);
   const changeScreen = () => { 
     onChangeScreen(!screen);
   }

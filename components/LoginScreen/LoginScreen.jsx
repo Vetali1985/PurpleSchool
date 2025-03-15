@@ -11,24 +11,37 @@ import {
   HeaderText,
   LogInContainer,
   LogInText,
+  ShowPasswordContainer,
+  ShowPasswordText,
 } from "../RegistrationScreen/RegistrationScreen.js";
+import { usePasswordToggle } from "../../hooks/usePasswordToggle.js";
 
 const LoginScreen = () => {
+  const { showPassword, togglePasswordVisibility } = usePasswordToggle();
   return (
     <Container>
       <InnerContainer>
         <InputContainer>
-          <HeaderText>Увійти</HeaderText>
+          <HeaderText style={{marginTop: 0}}>Увійти</HeaderText>
 
           <Input
             placeholder="Адреса електронної пошти"
             placeholderTextColor="#BDBDBD"
           />
-          <Input
-            style={{ marginBottom: 43 }}
-            placeholder="Пароль"
-            placeholderTextColor="#BDBDBD"
-          />
+            <ShowPasswordContainer >
+                      <Input
+                        
+                        placeholder="Пароль"
+                        secureTextEntry={showPassword}
+                        placeholderTextColor="#BDBDBD"
+                      />
+                      <TouchableOpacity onPress={togglePasswordVisibility}>
+                        <ShowPasswordText
+                        >
+                          Показати
+                        </ShowPasswordText>
+                      </TouchableOpacity>
+                    </ShowPasswordContainer>
           <Button onPress={() => alert("Login")}>
             <ButtonText>Увійти</ButtonText>
           </Button>
