@@ -21,17 +21,23 @@ export default function App() {
     onChangeScreen(!screen);
   }
   return (
-     <View style={styles.container}>
+    <View style={styles.container}>
+      <StatusBar
+        translucent
+        backgroundColor="transparent"
+        barStyle="light-content"
+      />
       <ImageBackground
         source={require("../assets/images/photo-bg.png")}
-        style={{ flex: 1, position: "absolute", width: "100%", height: "100%" }}
+        resizeMode="cover"
+        style={styles.image}
       >
-        <TouchableOpacity onPress={changeScreen} ><Text style={{ fontSize: 30 }}>+</Text></TouchableOpacity>
-     
-        {screen? <RegistrationScreen />:<LoginScreen />}
-        
+        <TouchableOpacity onPress={changeScreen}>
+          <Text style={{ fontSize: 30 }}>+</Text>
+        </TouchableOpacity>
+
+        {screen ? <RegistrationScreen /> : <LoginScreen />}
       </ImageBackground>
-      
     </View>
   );
 }
@@ -39,8 +45,16 @@ export default function App() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    justifyContent: "center",
-    alignItems: "center",
+    position: "absolute", // Убираем лишние отступы
+    top: 0,
+    left: 0,
+    right: 0,
+    bottom: 0,
   },
- 
+  image: {
+    flex: 1,
+    justifyContent: "center",
+    width: "100%",
+    height: "100%",
+  },
 });

@@ -108,7 +108,7 @@ export const LogInContainer = Styled.View`
 justify-content: center;
 align-items: center;
 flex-direction: row;
-margin-bottom: 45px;
+/* margin-bottom: 45px; */
 `;
 
 export const LogInText = Styled.Text`

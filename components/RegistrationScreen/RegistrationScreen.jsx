@@ -1,7 +1,6 @@
 import {
+  Platform,
   TouchableOpacity,
-  View,
-  Text,
 } from "react-native";
 import {
   Container,
@@ -19,15 +18,18 @@ import {
   ShowPasswordContainer,
   ShowPasswordText,
 } from "./RegistrationScreen.js";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { usePasswordToggle } from "../../hooks/usePasswordToggle.js"; 
+import  useKeyboardVisibility  from "../../hooks/useKeyboardVisibility.js";
 
 const RegistrationScreen = () => {
   const [login, setLogin] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const { showPassword, togglePasswordVisibility } = usePasswordToggle(); 
-
+  
+const isShowKeyboard = useKeyboardVisibility();
+  
   return (
     <Container>
       <InnerContainer>
@@ -45,25 +47,27 @@ const RegistrationScreen = () => {
             placeholder="Адреса електронної пошти"
             placeholderTextColor="#BDBDBD"
           />
-          <ShowPasswordContainer >
+          <ShowPasswordContainer>
             <Input
-              
               placeholder="Пароль"
               secureTextEntry={showPassword}
               placeholderTextColor="#BDBDBD"
             />
             <TouchableOpacity onPress={togglePasswordVisibility}>
-              <ShowPasswordText
-              >
-                Показати
+              <ShowPasswordText>
+                {!showPassword ? "Сховати" : "Показати"}
               </ShowPasswordText>
             </TouchableOpacity>
           </ShowPasswordContainer>
-
           <Button onPress={() => alert("Login")}>
             <ButtonText>Зареєструватися</ButtonText>
           </Button>
-          <LogInContainer>
+          <LogInContainer
+            style={{
+              marginBottom:
+                Platform.OS === "ios" ? (isShowKeyboard ? 0 : 45) : 45,
+            }}
+          >
             <LogInText>Уже зареєстровані?</LogInText>
             <TouchableOpacity onPress={() => alert("Login")}>
               <LogInText>Увійти</LogInText>
